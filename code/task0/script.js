@@ -13,7 +13,7 @@ class Users {
   }
 
   fetchUsers() {
-    fetch('https://randomuser.me/api/')
+    fetch('https://randomuser.me/api/?results=5&gender=female')
     .then(response => {
       console.log('Hello mam odpowiedź');
       console.log(response)
