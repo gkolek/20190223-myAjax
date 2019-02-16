@@ -67,12 +67,15 @@ class Users {
       console.log(this.users);
       this.render();
 
-      fetch('https://randomuser.me/api/?nat=gb')
-      .then(response => response.json())
-      .then(data => {
-        this.users = data;
-        this.render();
-      });
+      setTimeout(() => {
+        fetch('https://randomuser.me/api/?nat=gb')
+        .then(response => response.json())
+        .then(data => {
+          this.users = data;
+          console.log(data);
+          this.render();
+        });
+      }, 3000);
 
     })
     .catch(error => {
@@ -83,6 +86,7 @@ class Users {
 
 
   render() {
+    this.container.innerHTML = '';
     const row = document.createElement('div');
     if (!this.users.results) {
       return;
