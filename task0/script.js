@@ -3,16 +3,13 @@ class Users {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
 
-    this.users = {
-      results: []
-    };
+    this.users = {};
 
     this.init();
   }
 
   init() {
     this.fetchUsers()
-    this.render();
   }
 
   fetchUsers() {
@@ -23,14 +20,17 @@ class Users {
       return response.json();
     })
     .then(data => {
-      console.log(data);
       this.users = data;
+      console.log(this.users);
       this.render();
     });
   }
 
   render() {
     const ul = document.createElement('ul');
+    if (!this.users.results) {
+      return;
+    }
     this.users.results.forEach(elem => {
       const li = document.createElement('li');
       li.innerHTML = `${elem.name.first} ${elem.name.last}`;
