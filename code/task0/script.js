@@ -58,18 +58,29 @@ class Users {
     fetch('https://randomuser.me/api/?results=10')
     .then((response)  => {
       console.log('Hello mam odpowiedź');
-      console.log(resp  onse)
+      console.log(response)
+
       return response.json();
     })
     .then(data => {
       this.users = data;
       console.log(this.users);
       this.render();
+
+      fetch('https://randomuser.me/api/?nat=gb')
+      .then(response => response.json())
+      .then(data => {
+        this.users = data;
+        this.render();
+      });
+
     })
     .catch(error => {
       console.error('Mam błąd :)');
     });
   }
+
+
 
   render() {
     const row = document.createElement('div');
