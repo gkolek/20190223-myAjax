@@ -36,10 +36,29 @@ class Users {
   }
 
   fetchUsers() {
+
+    // const fetch = (url) => {
+    //   return new Promise((resolve, reject) => {
+    //      // GET url
+
+    //     const response = new Promise((resolve, reject) => {
+    //       resolve(); // rsponse.json()
+
+    //       reject();
+    //     });
+
+    //      resolve(response);
+
+    //      // fail
+    //      reject('Nie udało się ;(');
+    //   })
+    // }
+
+
     fetch('https://randomuser.me/api/?results=10')
     .then((response)  => {
       console.log('Hello mam odpowiedź');
-      console.log(response)
+      console.log(resp  onse)
       return response.json();
     })
     .then(data => {
