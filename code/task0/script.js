@@ -4,12 +4,35 @@ class Users {
     this.container = document.getElementById(containerId);
 
     this.users = {};
-
+    this.myPromiseObject = null;
     this.init();
   }
 
   init() {
-    this.fetchUsers()
+    this.fetchUsers();
+    this.myPromise();
+  }
+
+  myPromise() {
+
+    const getMyOrder = (menu, order) => {
+      new Promise((resolve, reject) => {
+        if (menu.includes(order)) {
+          resolve('Hurra! Jest w menu');
+        } else {
+          reject('Oh no! Nie ma w menu ;(');
+        }
+      });
+    }
+
+    getMyOrder(['sandwich', 'soup', 'drink'], 'schabowy')
+    .then(resolveText => {
+      console.log(resolveText);
+    })
+    .catch(rejectText => {
+      console.log(rejectText);
+    });
+
   }
 
   fetchUsers() {
@@ -30,16 +53,20 @@ class Users {
   }
 
   render() {
-    const ul = document.createElement('ul');
+    const row = document.createElement('div');
     if (!this.users.results) {
       return;
     }
     this.users.results.forEach(elem => {
-      const li = document.createElement('li');
-      li.innerHTML = `${elem.name.first} ${elem.name.last}`;
-      ul.appendChild(li);
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <h2>${elem.name.first} ${elem.name.last}</h2>
+        <img src=${elem.picture.thumbnail} > mobile: ${elem.cell}
+        <hr />
+      `;
+      row.appendChild(div);
     });
-    this.container.appendChild(ul);
+    this.container.appendChild(row);
   }
   // JSX
   // <ul>
