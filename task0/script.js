@@ -4,30 +4,36 @@ class Users {
     this.container = document.getElementById(containerId);
 
     this.users = {
-      results: [{
-        name: 'Jan',
-        surname: 'Kowalski'
-      }]
+      results: []
     };
 
     this.init();
   }
 
   init() {
-    // this.fetchUsers()
+    this.fetchUsers()
     this.render();
   }
 
   fetchUsers() {
-
-    // this.render();
+    fetch('https://randomuser.me/api/')
+    .then(response => {
+      console.log('Hello mam odpowiedź');
+      console.log(response)
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      this.users = data;
+      this.render();
+    });
   }
 
   render() {
     const ul = document.createElement('ul');
     this.users.results.forEach(elem => {
       const li = document.createElement('li');
-      li.innerHTML = `${elem.name} ${elem.surname}`;
+      li.innerHTML = `${elem.name.first} ${elem.name.last}`;
       ul.appendChild(li);
     });
     this.container.appendChild(ul);
