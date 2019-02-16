@@ -35,7 +35,7 @@ class Users {
 
   }
 
-  fetchUsers() {
+  async fetchUsers() {
 
     // const fetch = (url) => {
     //   return new Promise((resolve, reject) => {
@@ -55,32 +55,20 @@ class Users {
     // }
 
 
-    fetch('https://randomuser.me/api/?results=10')
-    .then((response)  => {
-      console.log('Hello mam odpowiedź');
-      console.log(response)
+    const users = await fetch('https://randomuser.me/api/?results=10')
+      .then(response => response.json())
+      .then(data => data);
 
-      return response.json();
-    })
-    .then(data => {
-      this.users = data;
-      console.log(this.users);
-      this.render();
+    console.log('users', users);
+    this.users = users;
+    this.render();
 
-      setTimeout(() => {
-        fetch('https://randomuser.me/api/?nat=gb')
-        .then(response => response.json())
-        .then(data => {
-          this.users = data;
-          console.log(data);
-          this.render();
-        });
-      }, 3000);
+    const newUsers = await fetch('https://randomuser.me/api/?nat=gb')
+      .then(response => response.json())
+      .then(data => data);
 
-    })
-    .catch(error => {
-      console.error('Mam błąd :)');
-    });
+    this.users = newUsers;
+    this.render();
   }
 
 
