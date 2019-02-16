@@ -13,8 +13,8 @@ class Users {
   }
 
   fetchUsers() {
-    fetch('https://randomuser.me/api/?results=5&gender=female')
-    .then(response => {
+    fetch('https://randomuser.me/api/?results=10')
+    .then((response)  => {
       console.log('Hello mam odpowiedź');
       console.log(response)
       return response.json();
@@ -23,6 +23,9 @@ class Users {
       this.users = data;
       console.log(this.users);
       this.render();
+    })
+    .catch(error => {
+      console.error('Mam błąd :)');
     });
   }
 
