@@ -55,7 +55,7 @@ class Users {
     // }
 
 
-    const users = await fetch('https://randomuser.me/api/?results=10')
+    const users = await fetch('http://localhost:3000/users')
       .then(response => response.json())
       .then(data => data);
 
@@ -63,12 +63,12 @@ class Users {
     this.users = users;
     this.render();
 
-    const newUsers = await fetch('https://randomuser.me/api/?nat=gb')
-      .then(response => response.json())
-      .then(data => data);
+    // const newUsers = await fetch('https://randomuser.me/api/?nat=gb')
+    //   .then(response => response.json())
+    //   .then(data => data);
 
-    this.users = newUsers;
-    this.render();
+    // this.users = newUsers;
+    // this.render();
   }
 
 
@@ -83,12 +83,34 @@ class Users {
       const div = document.createElement('div');
       div.innerHTML = `
         <h2>${elem.name.first} ${elem.name.last}</h2>
-        <img src=${elem.picture.thumbnail} > mobile: ${elem.cell}
         <hr />
       `;
       row.appendChild(div);
     });
     this.container.appendChild(row);
+
+
+    const myPromise = new Promise((resolve, reject) => {
+      if (znaleziono) {
+        resolve('Hurra znaleziono');
+      } else {
+        reject('Oh no, nie ma ;(');
+      }
+    });
+
+    // .....
+
+    myPromise() // -> obiekt typu promise
+    .then(response => {
+      console.log('Mam response: ', response);
+    })
+    .catch(error => {
+      console.log('Mam reject');
+    });
+
+
+
+
   }
   // JSX
   // <ul>
